@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | GameVault</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { darkMode: 'class' };
+    </script>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body class="min-h-screen bg-slate-950 text-slate-900">
+    <main class="grid min-h-screen lg:grid-cols-[1fr_460px]">
+      <section class="relative hidden overflow-hidden lg:block">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1500&q=80')] bg-cover bg-center"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-slate-950/90 via-slate-950/45 to-teal-950/55"></div>
+        <div class="relative flex h-full flex-col justify-between p-10 text-white">
+          <a href="./index.html" class="flex items-center gap-3 text-lg font-bold">
+            <span class="flex h-10 w-10 items-center justify-center rounded-md bg-white/15 ring-1 ring-white/20">
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect width="20" height="12" x="2" y="6" rx="2" />
+                <line x1="6" x2="10" y1="11" y2="11" />
+                <line x1="8" x2="8" y1="9" y2="13" />
+                <line x1="15" x2="15.01" y1="12" y2="12" />
+                <line x1="18" x2="18.01" y1="10" y2="10" />
+              </svg>
+            </span>
+            GameVault
+          </a>
+          <div class="max-w-xl">
+            <p class="text-sm font-semibold uppercase tracking-[0.22em] text-teal-200">Area privada</p>
+            <h1 class="mt-4 text-5xl font-black leading-tight">Sua biblioteca gamer em ordem.</h1>
+            <p class="mt-4 text-lg leading-8 text-slate-100">Entre para gerenciar titulos, plataformas, generos, precos e datas de lancamento.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="flex min-h-screen items-center justify-center bg-slate-100 px-5 py-10">
+        <div class="w-full max-w-md rounded-lg border border-white bg-white p-6 shadow-xl shadow-slate-950/10">
+          <div class="mb-6 flex items-center justify-between">
+            <div>
+              <p class="text-sm font-semibold uppercase tracking-wide text-teal-700">GameVault</p>
+              <h2 class="text-2xl font-black text-slate-950">Acesso ao sistema</h2>
+            </div>
+            <a href="./index.html" class="rounded-md border border-slate-200 p-2 text-slate-600 transition hover:bg-slate-50" title="Voltar">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="m12 19-7-7 7-7" />
+                <path d="M19 12H5" />
+              </svg>
+            </a>
+          </div>
+
+          <div class="mb-5 grid grid-cols-2 rounded-md bg-slate-100 p-1">
+            <button id="tab-login" type="button" class="rounded-md bg-white px-3 py-2 text-sm font-bold text-slate-950 shadow-sm" aria-controls="form-login" aria-selected="true">Login</button>
+            <button id="tab-cadastro" type="button" class="rounded-md px-3 py-2 text-sm font-bold text-slate-500" aria-controls="form-cadastro" aria-selected="false">Cadastro</button>
+          </div>
+
+          <form id="form-login" class="space-y-4">
+            <label class="block">
+              <span class="text-sm font-semibold text-slate-700">E-mail</span>
+              <input id="login-email" type="email" required autofocus class="mt-2 w-full rounded-md border border-slate-200 px-3 py-2.5 text-sm outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-100" />
+            </label>
+            <label class="block">
+              <span class="text-sm font-semibold text-slate-700">Senha</span>
+              <input id="login-senha" type="password" required class="mt-2 w-full rounded-md border border-slate-200 px-3 py-2.5 text-sm outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-100" />
+            </label>
+            <button id="btn-login" type="submit" class="flex w-full items-center justify-center gap-2 rounded-md bg-teal-600 px-4 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-teal-700">Entrar</button>
+          </form>
+
+          <form id="form-cadastro" class="hidden space-y-4">
+            <label class="block">
+              <span class="text-sm font-semibold text-slate-700">Nome</span>
+              <input id="cadastro-nome" type="text" required minlength="3" class="mt-2 w-full rounded-md border border-slate-200 px-3 py-2.5 text-sm outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-100" />
+            </label>
+            <label class="block">
+              <span class="text-sm font-semibold text-slate-700">E-mail</span>
+              <input id="cadastro-email" type="email" required class="mt-2 w-full rounded-md border border-slate-200 px-3 py-2.5 text-sm outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-100" />
+            </label>
+            <label class="block">
+              <span class="text-sm font-semibold text-slate-700">Senha</span>
+              <input id="cadastro-senha" type="password" required minlength="6" class="mt-2 w-full rounded-md border border-slate-200 px-3 py-2.5 text-sm outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-100" />
+            </label>
+            <button id="btn-cadastro" type="submit" class="flex w-full items-center justify-center gap-2 rounded-md bg-orange-500 px-4 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-orange-600">Criar conta</button>
+          </form>
+
+          <div id="message" class="mt-4 hidden rounded-md px-3 py-2 text-sm"></div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="./js/auth.js"></script>
+  </body>
+</html>
