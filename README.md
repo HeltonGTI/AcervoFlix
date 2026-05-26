@@ -1,58 +1,95 @@
-# GameVault - Sistema de Biblioteca de Games
+# GameVault - Biblioteca de Games
 
-Projeto academico com login, cadastro, area privada e CRUD completo de jogos usando HTML5, CSS3, JavaScript, Tailwind CSS e Supabase REST API.
+GameVault é um sistema web acadêmico para gerenciamento de uma biblioteca pessoal de jogos. A aplicação permite cadastrar usuários, autenticar sessão, acessar uma área privada e realizar o CRUD completo de jogos integrado ao Supabase via REST API.
+
+## Visão geral
+
+O projeto foi desenvolvido com foco em uma experiência simples, responsiva e funcional, reunindo recursos essenciais de uma aplicação web com autenticação, persistência de dados e interface administrativa.
 
 ## Funcionalidades
 
-- Cadastro de usuario.
-- Login com sessao salva no navegador.
-- Area privada protegida.
-- CRUD completo de jogos: criar, listar, editar e excluir.
-- Tabela responsiva com busca.
-- Cards estatisticos.
-- Modal para cadastro e edicao.
-- Modo dark.
-- Validacao de dados no formulario e no banco para evitar preco negativo.
-- Mensagens de retorno para cadastro, edicao e exclusao.
-- Banco com duas tabelas, mais de 5 atributos e foreign key.
+- Cadastro e login de usuários.
+- Sessão salva no navegador.
+- Área privada protegida.
+- Cadastro, listagem, edição e exclusão de jogos.
+- Busca na tabela de jogos.
+- Cards estatísticos no dashboard.
+- Modal para criação e edição de registros.
+- Layout responsivo com Tailwind CSS.
+- Modo claro e modo escuro.
+- Validação de dados no formulário.
+- Restrição no banco para impedir preço negativo.
+- Mensagens de retorno para ações do usuário.
+- Banco de dados relacional com chave estrangeira entre usuários e jogos.
 
-## Estrutura
+## Tecnologias utilizadas
+
+- HTML5
+- CSS3
+- JavaScript ES Modules
+- Tailwind CSS
+- Supabase REST API
+- PostgreSQL
+- GitHub Pages
+- GitHub Actions
+
+## Estrutura do projeto
 
 ```text
 biblioteca-games/
-|-- index.html
-|-- login.html
-|-- dashboard.html
+|-- .github/
+|   `-- workflows/
+|       `-- deploy.yml
 |-- css/
 |   `-- style.css
 |-- js/
-|   |-- supabase.js
 |   |-- api.js
 |   |-- auth.js
-|   `-- games.js
+|   |-- games.js
+|   `-- supabase.js
 |-- sql/
 |   `-- tables.sql
+|-- dashboard.html
+|-- index.html
+|-- login.html
 `-- README.md
 ```
 
-## Configurar Supabase
+## Configuração do Supabase
 
 1. Crie um projeto no Supabase.
-2. Abra o SQL Editor.
-3. Execute o arquivo `sql/tables.sql`.
-4. Copie a URL do projeto e a anon public key.
-5. Edite `js/supabase.js`:
+2. Acesse o SQL Editor.
+3. Execute o script disponível em `sql/tables.sql`.
+4. Copie a URL do projeto e a chave pública anon/publishable.
+5. Atualize o arquivo `js/supabase.js`:
 
 ```js
-export const SUPABASE_URL = "SUA_URL";
-export const SUPABASE_KEY = "SUA_KEY";
+export const SUPABASE_URL = "SUA_URL_DO_SUPABASE";
+export const SUPABASE_KEY = "SUA_CHAVE_PUBLICA";
+
+export const API_URL = `${SUPABASE_URL}/rest/v1`;
 ```
 
-Se o login mostrar erro de conexao com o Supabase, confira primeiro se a URL do projeto ainda existe. Um projeto pausado, removido ou uma URL digitada errado faz o navegador falhar antes mesmo de consultar a tabela `usuarios`.
+Caso o login apresente erro de conexão, verifique se a URL do projeto está correta e se o projeto do Supabase está ativo. Projetos pausados, removidos ou URLs digitadas incorretamente impedem a comunicação com a API antes mesmo da consulta às tabelas.
+
+## Banco de dados
+
+O script SQL cria duas tabelas principais:
+
+- `usuarios`: armazena nome, e-mail, senha e data de criação.
+- `jogos`: armazena título, gênero, plataforma, preço, data de lançamento e vínculo com o usuário.
+
+Também são configurados:
+
+- extensão `pgcrypto` para geração de UUID;
+- chave estrangeira entre `jogos.usuario_id` e `usuarios.id`;
+- constraint para impedir preços negativos;
+- políticas básicas de acesso para uso acadêmico via Supabase REST API;
+- usuário e jogo de demonstração.
 
 ## Como executar localmente
 
-Como o projeto usa arquivos JavaScript do tipo `module`, rode com um servidor local simples ou publique no GitHub Pages.
+Como o projeto utiliza JavaScript do tipo `module`, execute a aplicação com um servidor local.
 
 Exemplo com Python:
 
@@ -61,13 +98,15 @@ cd biblioteca-games
 python -m http.server 5500
 ```
 
-Depois acesse:
+Depois, acesse no navegador:
 
 ```text
 http://localhost:5500
 ```
 
-Usuario de teste criado pelo SQL:
+## Credenciais de demonstração
+
+O script SQL cria um usuário inicial para testes:
 
 ```text
 E-mail: demo@email.com
@@ -76,19 +115,26 @@ Senha: 123456
 
 ## Deploy no GitHub Pages
 
-Depois de enviar para o GitHub:
+O projeto já inclui um workflow em `.github/workflows/deploy.yml` para publicação automática no GitHub Pages.
 
-1. Acesse Settings.
-2. Entre em Pages.
-3. Em Source, selecione GitHub Actions.
-5. Acesse a URL gerada pelo GitHub Pages.
+Para publicar:
 
-Se este projeto for enviado como repositorio proprio, a URL sera semelhante a:
+1. Envie o projeto para um repositório no GitHub.
+2. Acesse `Settings > Pages`.
+3. Em `Source`, selecione `GitHub Actions`.
+4. Faça push na branch `main`.
+5. Aguarde a execução do workflow `Deploy GitHub Pages`.
+
+A URL publicada seguirá o padrão:
 
 ```text
 https://seuusuario.github.io/seurepositorio/
 ```
 
-## Observacao de seguranca
+## Observações de segurança
 
-Este projeto segue o modelo simples pedido para trabalho academico. A senha fica na tabela `usuarios` para facilitar a demonstracao com REST API. Em um sistema real, use Supabase Auth ou senhas com hash no backend, nunca senha em texto puro.
+Este projeto foi criado para fins acadêmicos. Em um ambiente de produção, recomenda-se utilizar autenticação nativa do Supabase, regras de Row Level Security mais restritivas e nunca armazenar senhas em texto puro.
+
+## Status do projeto
+
+Projeto funcional com landing page, tela de login, dashboard administrativo, integração com Supabase e deploy automatizado pelo GitHub Pages.
