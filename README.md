@@ -11,6 +11,7 @@ O AcervoFlix foi desenvolvido como uma aplicacao front-end moderna, responsiva e
 
 ## Sumario
 
+- [Acesso online](#acesso-online)
 - [Visao geral](#visao-geral)
 - [Demonstracao funcional](#demonstracao-funcional)
 - [Funcionalidades](#funcionalidades)
@@ -24,6 +25,10 @@ O AcervoFlix foi desenvolvido como uma aplicacao front-end moderna, responsiva e
 - [Credenciais de demonstracao](#credenciais-de-demonstracao)
 - [Seguranca e limites conhecidos](#seguranca-e-limites-conhecidos)
 - [Roadmap](#roadmap)
+
+## Acesso online
+
+Acesse o projeto publicado no GitHub Pages: <https://heltongti.github.io/AcervoFlix/>
 
 ## Visao geral
 
