@@ -1,15 +1,15 @@
-# AcervoFlix
+# AcervoFlix 📽️
 
 Sistema web para gerenciamento de uma watchlist privada de filmes e series, com autenticacao, dashboard administrativo, CRUD completo de favoritos, integracao com Supabase e busca online de titulos pelo TMDb.
 
 O AcervoFlix foi desenvolvido como uma aplicacao front-end moderna, responsiva e sem etapa de build obrigatoria. A proposta e entregar uma experiencia direta: o usuario acessa, cria sua conta, pesquisa filmes ou series, salva seus favoritos e consulta onde assistir cada titulo.
 
-## Autores
+## Autores 🖋️
 
 - Anderson Henrique Domingues
 - Helton Augusto de Toledo
 
-## Sumario
+## Sumario 
 
 - [Acesso online](#acesso-online)
 - [Visao geral](#visao-geral)
@@ -26,7 +26,7 @@ O AcervoFlix foi desenvolvido como uma aplicacao front-end moderna, responsiva e
 - [Seguranca e limites conhecidos](#seguranca-e-limites-conhecidos)
 - [Roadmap](#roadmap)
 
-## Acesso online
+## Acesso online 
 
 Acesse o projeto publicado no GitHub Pages: <https://heltongti.github.io/AcervoFlix/>
 
