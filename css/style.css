@@ -18,6 +18,17 @@ select {
   pointer-events: none;
 }
 
+.resultados-web-scroll {
+  max-height: calc((10rem * 6) + (0.75rem * 5));
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.favoritos-table-scroll {
+  max-height: calc(2.75rem + (6.5rem * 10));
+  overflow-y: auto;
+}
+
 @media (max-width: 640px) {
   table {
     min-width: 760px;

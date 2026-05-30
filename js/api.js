@@ -1,4 +1,4 @@
-import { API_URL, SUPABASE_KEY } from './supabase.js';
+import { API_URL, SUPABASE_KEY } from './supabase.js?v=20260530-3';
 
 const erroConfiguracao = validarConfiguracao();
 
@@ -29,27 +29,39 @@ export async function criarUsuario(usuario) {
   });
 }
 
-export async function listarJogos(usuarioId) {
-  return request(`/jogos?select=*&usuario_id=eq.${usuarioId}&order=titulo.asc`);
+export async function atualizarSenhaUsuario(email, senha) {
+  const filtroEmail = encodeURIComponent(email);
+  return request(`/usuarios?email=eq.${filtroEmail}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ senha }),
+  });
 }
 
-export async function criarJogo(jogo) {
-  return request('/jogos', {
+export async function listarFilmes(usuarioId) {
+  return request(`/filmes?select=*&usuario_id=eq.${usuarioId}&order=nome.asc`);
+}
+
+export async function criarFilme(filme) {
+  return salvarFilmeComFallback('/filmes', {
     method: 'POST',
     headers: { Prefer: 'return=representation' },
-    body: JSON.stringify(jogo),
-  });
+  }, filme);
 }
 
-export async function atualizarJogo(id, jogo) {
-  return request(`/jogos?id=eq.${id}`, {
+export async function atualizarFilme(id, filme) {
+  return salvarFilmeComFallback(`/filmes?id=eq.${id}`, {
     method: 'PATCH',
-    body: JSON.stringify(jogo),
+  }, filme);
+}
+
+export async function excluirFilme(id) {
+  return request(`/filmes?id=eq.${id}`, {
+    method: 'DELETE',
   });
 }
 
-export async function excluirJogo(id) {
-  return request(`/jogos?id=eq.${id}`, {
+export async function excluirTodosFilmes(usuarioId) {
+  return request(`/filmes?usuario_id=eq.${usuarioId}`, {
     method: 'DELETE',
   });
 }
@@ -85,12 +97,54 @@ async function request(path, options = {}) {
   return response.json();
 }
 
+async function salvarFilmeComFallback(path, options, filme) {
+  try {
+    return await request(path, {
+      ...options,
+      body: JSON.stringify(prepararFilme(filme)),
+    });
+  } catch (error) {
+    if (!ehErroColunaAvaliacao(error.message)) {
+      throw error;
+    }
+
+    return request(path, {
+      ...options,
+      body: JSON.stringify(prepararFilme(filme, false)),
+    });
+  }
+}
+
+function ehErroColunaAvaliacao(mensagem) {
+  return mensagem.includes('Coluna avaliacao nao encontrada')
+    || mensagem.includes("'avaliacao' column")
+    || mensagem.includes('avaliacao');
+}
+
+function prepararFilme(filme, incluirAvaliacao = true) {
+  const dados = {
+    nome: filme.nome,
+    tipo: filme.tipo || 'Filme',
+    categoria: filme.categoria,
+    plataforma: filme.plataforma,
+    imagem: filme.imagem || null,
+    url: filme.url || null,
+    usuario_id: filme.usuario_id,
+  };
+
+  if (incluirAvaliacao) {
+    dados.avaliacao = filme.avaliacao;
+  }
+
+  return dados;
+}
+
 function validarConfiguracao() {
   if (!API_URL.includes('https://') || API_URL.includes('SUA_URL')) {
     return 'Configure a SUPABASE_URL em js/supabase.js.';
   }
 
-  if (!SUPABASE_KEY || SUPABASE_KEY.includes('SUA_KEY')) {
+  if (!SUPABASE_KEY || SUPABASE_KEY.includes('SUA_KEY') || SUPABASE_KEY.includes('SUA_CHAVE')) {
     return 'Configure a SUPABASE_KEY em js/supabase.js.';
   }
 
@@ -106,6 +160,22 @@ async function obterMensagemErro(response) {
 
   try {
     const data = JSON.parse(text);
+    if (data.code === 'PGRST205') {
+      return 'Tabela nao encontrada no Supabase. Execute o script sql/tables.sql no SQL Editor do projeto configurado em js/supabase.js.';
+    }
+
+    if (data.code === 'PGRST204' && data.message?.includes("'imagem' column")) {
+      return 'Coluna imagem nao encontrada no Supabase. Execute no SQL Editor: alter table filmes add column if not exists imagem text; notify pgrst, \'reload schema\';';
+    }
+
+    if (data.code === 'PGRST204' && data.message?.includes("'url' column")) {
+      return 'Coluna url nao encontrada no Supabase. Execute no SQL Editor: alter table filmes add column if not exists url text; notify pgrst, \'reload schema\';';
+    }
+
+    if (data.code === 'PGRST204' && data.message?.includes("'avaliacao' column")) {
+      return 'Coluna avaliacao nao encontrada no Supabase. Execute no SQL Editor: alter table filmes add column if not exists avaliacao numeric(3,1); notify pgrst, \'reload schema\';';
+    }
+
     return data.message || data.error_description || data.error || text;
   } catch {
     return text;

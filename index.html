@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GameVault | Biblioteca de Games</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>AcervoFlix | Sua watchlist privada</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -19,52 +22,45 @@
         },
       };
     </script>
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/style.css?v=20260530-1" />
   </head>
-  <body class="min-h-screen bg-[#f6f7fb] text-slate-900">
+  <body class="min-h-screen bg-[#070a12] text-slate-900">
     <main class="relative min-h-screen overflow-hidden">
-      <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1800&q=80')] bg-cover bg-center"></div>
-      <div class="absolute inset-0 bg-slate-950/70"></div>
+      <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1800&q=80')] bg-cover bg-center"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(20,184,166,0.26),transparent_28%),linear-gradient(110deg,rgba(2,6,23,0.96)_0%,rgba(2,6,23,0.82)_48%,rgba(15,23,42,0.46)_100%)]"></div>
 
       <section class="relative mx-auto flex min-h-screen max-w-6xl flex-col justify-between px-5 py-6 sm:px-8">
         <nav class="flex items-center justify-between text-white">
           <a href="./index.html" class="flex items-center gap-3">
-            <span class="flex h-10 w-10 items-center justify-center rounded-md bg-white/15 ring-1 ring-white/25">
+            <span class="flex h-10 w-10 items-center justify-center rounded-md bg-white/10 ring-1 ring-white/20">
               <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <line x1="6" x2="10" y1="11" y2="11" />
-                <line x1="8" x2="8" y1="9" y2="13" />
-                <line x1="15" x2="15.01" y1="12" y2="12" />
-                <line x1="18" x2="18.01" y1="10" y2="10" />
                 <rect width="20" height="12" x="2" y="6" rx="2" />
+                <path d="M7 6v12" />
+                <path d="M17 6v12" />
+                <path d="M2 12h20" />
               </svg>
             </span>
-            <span class="text-lg font-bold">GameVault</span>
+            <span class="text-lg font-bold">AcervoFlix</span>
           </a>
           <a href="./login.html" class="rounded-md bg-white px-4 py-2 text-sm font-semibold text-slate-950 shadow-sm transition hover:bg-teal-50">Entrar</a>
         </nav>
 
-        <div class="grid gap-8 py-16 lg:grid-cols-[1fr_380px] lg:items-end">
+        <div class="py-14">
           <div class="max-w-3xl text-white">
-            <p class="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-teal-200">Sistema academico CRUD</p>
-            <h1 class="text-5xl font-black leading-tight sm:text-6xl lg:text-7xl">GameVault</h1>
+            <p class="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-teal-200">Sua watchlist privada</p>
+            <h1 class="text-5xl font-black leading-tight sm:text-6xl lg:text-7xl">AcervoFlix</h1>
             <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-100">
-              Biblioteca privada para cadastrar, editar, listar e excluir jogos com login, sessao autenticada e Supabase REST API.
+              Organize filmes e series, descubra onde assistir e mantenha seus favoritos em um so lugar.
             </p>
             <div class="mt-8 flex flex-wrap gap-3">
-              <a href="./login.html" class="rounded-md bg-teal-400 px-5 py-3 text-sm font-bold text-slate-950 shadow-lg shadow-teal-950/20 transition hover:bg-teal-300">Acessar sistema</a>
-              <a href="./dashboard.html" class="rounded-md border border-white/35 bg-white/10 px-5 py-3 text-sm font-bold text-white backdrop-blur transition hover:bg-white/20">Ver dashboard</a>
+              <a href="./login.html" class="rounded-md bg-teal-300 px-5 py-3 text-sm font-bold text-slate-950 shadow-lg shadow-teal-950/20 transition hover:bg-teal-200">Entrar no acervo</a>
+            </div>
+            <div class="mt-10 flex flex-wrap gap-3 text-sm text-slate-200">
+              <span class="rounded-md border border-white/15 bg-white/10 px-3 py-2 backdrop-blur">Filmes e series</span>
+              <span class="rounded-md border border-white/15 bg-white/10 px-3 py-2 backdrop-blur">Categorias salvas</span>
+              <span class="rounded-md border border-white/15 bg-white/10 px-3 py-2 backdrop-blur">Plataformas em ordem</span>
             </div>
           </div>
-
-          <aside class="rounded-lg border border-white/15 bg-white/10 p-5 text-white backdrop-blur">
-            <p class="text-sm font-semibold text-teal-100">Entrega inclui</p>
-            <div class="mt-4 grid gap-3 text-sm text-slate-100">
-              <div class="flex items-center gap-3"><span class="h-2 w-2 rounded-full bg-teal-300"></span>Cadastro e login de usuarios</div>
-              <div class="flex items-center gap-3"><span class="h-2 w-2 rounded-full bg-orange-300"></span>CRUD completo de jogos</div>
-              <div class="flex items-center gap-3"><span class="h-2 w-2 rounded-full bg-sky-300"></span>Cards, modal, tabela responsiva e modo dark</div>
-              <div class="flex items-center gap-3"><span class="h-2 w-2 rounded-full bg-fuchsia-300"></span>SQL com duas tabelas e chave estrangeira</div>
-            </div>
-          </aside>
         </div>
       </section>
     </main>
