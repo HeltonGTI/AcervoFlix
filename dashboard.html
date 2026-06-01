@@ -38,7 +38,8 @@
           </a>
         </nav>
 
-        <section class="mt-6 rounded-md border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-950/50">
+        <div id="formulario-desktop-slot">
+          <section id="painel-formulario" class="mt-6 rounded-md border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-950/50">
           <h2 id="titulo-formulario" class="text-lg font-black text-slate-950 dark:text-white">Novo favorito</h2>
           <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Salve filmes e series para encontrar depois sem perder tempo.</p>
           <form id="form-filme" class="mt-5 grid gap-3">
@@ -73,7 +74,8 @@
               <button id="btn-salvar" type="submit" class="flex-1 rounded-md bg-teal-600 px-4 py-2 text-sm font-bold text-white transition hover:bg-teal-700">Salvar favorito</button>
             </div>
           </form>
-        </section>
+          </section>
+        </div>
       </aside>
 
       <main class="min-w-0 flex-1">
@@ -100,6 +102,8 @@
         </header>
 
         <section class="px-4 py-6 sm:px-6">
+          <div id="formulario-mobile-slot" class="lg:hidden"></div>
+
           <div class="min-w-0">
             <div class="grid gap-4 md:grid-cols-3">
               <article class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">

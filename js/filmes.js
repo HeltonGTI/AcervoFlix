@@ -21,6 +21,9 @@ const statusBuscaWeb = document.getElementById('status-busca-web');
 const resultadosWeb = document.getElementById('resultados-web');
 const listaCategorias = document.getElementById('lista-categorias');
 const listaPlataformas = document.getElementById('lista-plataformas');
+const painelFormulario = document.getElementById('painel-formulario');
+const formularioDesktopSlot = document.getElementById('formulario-desktop-slot');
+const formularioMobileSlot = document.getElementById('formulario-mobile-slot');
 const btnNovo = document.getElementById('btn-novo-filme');
 const btnCancelar = document.getElementById('btn-cancelar');
 const btnSalvar = document.getElementById('btn-salvar');
@@ -31,6 +34,7 @@ const btnDark = document.getElementById('btn-dark');
 let filmes = [];
 let resultadosBusca = [];
 const LIMITE_RESULTADOS_TMDB = 12;
+const mediaMobile = window.matchMedia('(max-width: 1023px)');
 
 const generosTmdb = {
   12: 'Aventura',
@@ -173,6 +177,7 @@ if (!usuario) {
 
 usuarioLogado.textContent = `Bem-vinda de volta, ${formatarNomeUsuario(usuario.nome)}`;
 document.documentElement.classList.toggle('dark', localStorage.getItem('cinevault_dark') === 'true');
+atualizarLocalFormulario();
 
 btnNovo.addEventListener('click', abrirModalNovo);
 btnCancelar.addEventListener('click', abrirModalNovo);
@@ -183,6 +188,11 @@ filtroTipo.addEventListener('change', renderizarTabela);
 btnLogout.addEventListener('click', sair);
 btnDark.addEventListener('click', alternarDark);
 btnLimparFavoritos.addEventListener('click', limparTodosFavoritos);
+if (typeof mediaMobile.addEventListener === 'function') {
+  mediaMobile.addEventListener('change', atualizarLocalFormulario);
+} else {
+  mediaMobile.addListener(atualizarLocalFormulario);
+}
 
 listaFilmes.addEventListener('click', (event) => {
   const botao = event.target.closest('button[data-acao]');
@@ -219,6 +229,13 @@ resultadosWeb.addEventListener('click', (event) => {
 
 renderizarResultadosWeb(destaquesIniciais);
 await carregarFilmes();
+
+function atualizarLocalFormulario() {
+  const destino = mediaMobile.matches ? formularioMobileSlot : formularioDesktopSlot;
+  if (destino && painelFormulario.parentElement !== destino) {
+    destino.appendChild(painelFormulario);
+  }
+}
 
 async function carregarFilmes() {
   listaFilmes.innerHTML = linhaMensagem('Carregando titulos...');
