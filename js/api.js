@@ -123,7 +123,7 @@ function ehErroColunaAvaliacao(mensagem) {
 
 function prepararFilme(filme, incluirAvaliacao = true) {
   const dados = {
-    nome: filme.nome,
+    nome: filme.nome || null,
     tipo: filme.tipo || 'Filme',
     categoria: filme.categoria,
     plataforma: filme.plataforma,

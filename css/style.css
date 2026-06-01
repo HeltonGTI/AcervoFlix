@@ -18,6 +18,18 @@ select {
   pointer-events: none;
 }
 
+#painel-formulario,
+#form-filme,
+#form-filme label,
+#mensagem-formulario {
+  min-width: 0;
+}
+
+#form-filme input,
+#form-filme select {
+  max-width: 100%;
+}
+
 .resultados-web-scroll {
   max-height: calc((10rem * 6) + (0.75rem * 5));
   overflow-y: auto;

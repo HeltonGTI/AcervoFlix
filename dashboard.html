@@ -47,28 +47,48 @@
             <input type="hidden" id="imagem" />
             <input type="hidden" id="url" />
             <input type="hidden" id="avaliacao" />
-            <label class="block">
+            <label class="block min-w-0">
               <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">Nome do titulo</span>
-              <input id="nome" type="text" required maxlength="120" class="mt-2 w-full rounded-md border border-slate-200 px-3 py-2.5 text-sm outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-100 dark:border-slate-700 dark:bg-slate-950 dark:text-white" />
+              <input id="nome" type="text" maxlength="120" placeholder="Opcional" class="mt-2 w-full min-w-0 rounded-md border border-slate-200 px-3 py-2.5 text-sm outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-100 dark:border-slate-700 dark:bg-slate-950 dark:text-white" />
             </label>
-            <label class="block">
+            <label class="block min-w-0">
               <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">Tipo</span>
-              <select id="tipo" required class="mt-2 w-full rounded-md border border-slate-200 px-3 py-2.5 text-sm outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-100 dark:border-slate-700 dark:bg-slate-950 dark:text-white">
+              <select id="tipo" required class="mt-2 w-full min-w-0 rounded-md border border-slate-200 px-3 py-2.5 text-sm outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-100 dark:border-slate-700 dark:bg-slate-950 dark:text-white">
                 <option value="Filme">Filme</option>
                 <option value="Serie">Serie</option>
               </select>
             </label>
-            <label class="block">
+            <label class="relative block min-w-0">
               <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">Genero ou categoria</span>
-              <input id="categoria" type="text" required list="lista-categorias" placeholder="Acao, Drama, Suspense..." class="mt-2 w-full rounded-md border border-slate-200 px-3 py-2.5 text-sm outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-100 dark:border-slate-700 dark:bg-slate-950 dark:text-white" />
-              <datalist id="lista-categorias"></datalist>
+              <div class="mt-2 flex gap-2">
+                <div class="relative min-w-0 flex-1">
+                  <input id="categoria" type="text" required autocomplete="off" aria-controls="sugestoes-categorias" aria-expanded="false" placeholder="Acao, Drama, Suspense..." class="w-full min-w-0 rounded-md border border-slate-200 px-3 py-2.5 pr-10 text-sm outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-100 dark:border-slate-700 dark:bg-slate-950 dark:text-white" />
+                  <button id="btn-toggle-categorias" type="button" class="absolute right-2 top-1/2 inline-flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-md text-slate-500 transition hover:bg-slate-100 hover:text-slate-800 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100" title="Mostrar lista de generos e categorias" aria-label="Mostrar lista de generos e categorias">
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+                  </button>
+                </div>
+                <button id="btn-adicionar-categoria" type="button" class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-teal-200 bg-white text-teal-700 transition hover:bg-teal-50 dark:border-teal-900 dark:bg-slate-950 dark:text-teal-300 dark:hover:bg-teal-950/30" title="Adicionar genero ou categoria na lista" aria-label="Adicionar genero ou categoria na lista">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14" /><path d="M12 5v14" /></svg>
+                </button>
+              </div>
+              <div id="sugestoes-categorias" class="hidden absolute left-0 right-0 z-30 mt-1 max-h-72 overflow-y-auto rounded-md border border-slate-200 bg-white p-1 shadow-lg dark:border-slate-700 dark:bg-slate-900"></div>
             </label>
-            <label class="block">
+            <label class="relative block min-w-0">
               <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">Onde assistir</span>
-              <input id="plataforma" type="text" required list="lista-plataformas" placeholder="Netflix, Prime Video, Disney+..." class="mt-2 w-full rounded-md border border-slate-200 px-3 py-2.5 text-sm outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-100 dark:border-slate-700 dark:bg-slate-950 dark:text-white" />
-              <datalist id="lista-plataformas"></datalist>
+              <div class="mt-2 flex gap-2">
+                <div class="relative min-w-0 flex-1">
+                  <input id="plataforma" type="text" required autocomplete="off" aria-controls="sugestoes-plataformas" aria-expanded="false" placeholder="Netflix, Prime Video, Disney+..." class="w-full min-w-0 rounded-md border border-slate-200 px-3 py-2.5 pr-10 text-sm outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-100 dark:border-slate-700 dark:bg-slate-950 dark:text-white" />
+                  <button id="btn-toggle-plataformas" type="button" class="absolute right-2 top-1/2 inline-flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-md text-slate-500 transition hover:bg-slate-100 hover:text-slate-800 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100" title="Mostrar lista de onde assistir" aria-label="Mostrar lista de onde assistir">
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+                  </button>
+                </div>
+                <button id="btn-adicionar-plataforma" type="button" class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-teal-200 bg-white text-teal-700 transition hover:bg-teal-50 dark:border-teal-900 dark:bg-slate-950 dark:text-teal-300 dark:hover:bg-teal-950/30" title="Adicionar onde assistir na lista" aria-label="Adicionar onde assistir na lista">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14" /><path d="M12 5v14" /></svg>
+                </button>
+              </div>
+              <div id="sugestoes-plataformas" class="hidden absolute left-0 right-0 z-30 mt-1 max-h-72 overflow-y-auto rounded-md border border-slate-200 bg-white p-1 shadow-lg dark:border-slate-700 dark:bg-slate-900"></div>
             </label>
-            <div id="mensagem-formulario" class="hidden rounded-md px-3 py-2 text-sm"></div>
+            <div id="mensagem-formulario" class="hidden text-sm font-semibold leading-snug"></div>
             <div class="flex gap-2">
               <button id="btn-cancelar" type="button" class="hidden rounded-md border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800">Cancelar</button>
               <button id="btn-salvar" type="submit" class="flex-1 rounded-md bg-teal-600 px-4 py-2 text-sm font-bold text-white transition hover:bg-teal-700">Salvar favorito</button>
@@ -107,7 +127,7 @@
           <div class="min-w-0">
             <div class="grid gap-4 md:grid-cols-3">
               <article class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-                <p class="text-sm font-semibold text-slate-500 dark:text-slate-400">Total de titulos</p>
+                <p class="text-sm font-semibold text-slate-500 dark:text-slate-400">Total de cadastros</p>
                 <strong id="stat-total" class="mt-2 block text-3xl font-black text-slate-950 dark:text-white">0</strong>
               </article>
               <article class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
@@ -199,11 +219,12 @@
                 </table>
               </div>
             </section>
+
           </div>
         </section>
       </main>
     </div>
 
-    <script type="module" src="./js/filmes.js?v=20260530-20"></script>
+    <script type="module" src="./js/filmes.js?v=20260531-5"></script>
   </body>
 </html>

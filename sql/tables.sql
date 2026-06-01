@@ -10,7 +10,7 @@ create table if not exists usuarios (
 
 create table if not exists filmes (
   id uuid primary key default gen_random_uuid(),
-  nome text not null,
+  nome text,
   tipo text not null default 'Filme',
   categoria text not null,
   plataforma text not null,
@@ -24,6 +24,7 @@ alter table filmes add column if not exists imagem text;
 alter table filmes add column if not exists url text;
 alter table filmes add column if not exists tipo text not null default 'Filme';
 alter table filmes add column if not exists avaliacao numeric(3,1);
+alter table filmes alter column nome drop not null;
 
 create unique index if not exists filmes_titulo_unico_por_usuario
 on filmes (usuario_id, lower(regexp_replace(trim(nome), '\s+', ' ', 'g')));
