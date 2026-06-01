@@ -63,9 +63,9 @@ Fluxo principal da aplicacao:
 - Filtro por tipo: filmes, series ou todos.
 - Estatisticas automaticas no dashboard.
 - Busca online no TMDb por:
-  - nome do titulo;
-  - genero;
-  - categoria.
+- nome do titulo;
+- genero;
+- categoria.
 - Consulta de provedores de streaming no Brasil.
 - Sugestoes de categorias e plataformas via `datalist`.
 - Cards de resultados online com poster, tipo, categoria, avaliacao e link externo.
