@@ -1,5 +1,6 @@
 import { atualizarFilme, criarFilme, excluirFilme, excluirTodosFilmes, listarFilmes } from './api.js?v=20260530-8';
 import { TMDB_API_KEY } from './supabase.js?v=20260530-4';
+import { iniciarTemporizadorInatividade, limparSessao, obterUsuarioSessao } from './session.js?v=20260601-1';
 
 const usuario = obterUsuarioSessao();
 const listaFilmes = document.getElementById('lista-filmes');
@@ -188,6 +189,9 @@ if (!usuario) {
 usuarioLogado.textContent = `Bem-vinda de volta, ${formatarNomeUsuario(usuario.nome)}`;
 document.documentElement.classList.toggle('dark', localStorage.getItem('cinevault_dark') === 'true');
 atualizarLocalFormulario();
+iniciarTemporizadorInatividade(() => {
+  window.location.assign('./login.html');
+});
 
 btnNovo.addEventListener('click', abrirModalNovo);
 btnCancelar.addEventListener('click', abrirModalNovo);
@@ -727,15 +731,6 @@ function normalizarUrlExterna(url, fallback) {
   }
 }
 
-function obterUsuarioSessao() {
-  try {
-    return JSON.parse(localStorage.getItem('cinevault_usuario') || 'null');
-  } catch {
-    localStorage.removeItem('cinevault_usuario');
-    return null;
-  }
-}
-
 function formatarNomeUsuario(nome) {
   return (nome || 'visitante')
     .trim()
@@ -745,7 +740,7 @@ function formatarNomeUsuario(nome) {
 }
 
 function sair() {
-  localStorage.removeItem('cinevault_usuario');
+  limparSessao();
   window.location.assign('./login.html');
 }
 

@@ -1,4 +1,5 @@
 import { atualizarSenhaUsuario, buscarUsuarioPorEmail, buscarUsuarioPorLogin, criarUsuario } from './api.js?v=20260530-2';
+import { obterUsuarioSessao, salvarSessao } from './session.js?v=20260601-1';
 
 const formLogin = document.getElementById('form-login');
 const formCadastro = document.getElementById('form-cadastro');
@@ -20,7 +21,7 @@ formLogin.addEventListener('submit', entrar);
 formCadastro.addEventListener('submit', cadastrar);
 formRecuperar.addEventListener('submit', recuperarSenha);
 
-if (localStorage.getItem('cinevault_usuario')) {
+if (obterUsuarioSessao()) {
   window.location.assign('./dashboard.html');
 }
 
@@ -62,9 +63,12 @@ async function cadastrar(event) {
       return;
     }
 
-    const usuarios = await criarUsuario({ nome, email, senha });
-    salvarSessao(usuarios[0]);
-    window.location.assign('./dashboard.html');
+    await criarUsuario({ nome, email, senha });
+    formCadastro.reset();
+    document.getElementById('login-email').value = email;
+    document.getElementById('login-senha').value = '';
+    alternarAba('login', false);
+    mostrarMensagem('Conta criada com sucesso. Entre com seu e-mail e senha para acessar.', 'sucesso');
   } catch (error) {
     mostrarMensagem(`Erro ao cadastrar: ${limparErro(error.message)}`, 'erro');
   } finally {
@@ -124,14 +128,6 @@ function alternarAba(aba, limparMensagem = true) {
   if (limparMensagem) {
     message.classList.add('hidden');
   }
-}
-
-function salvarSessao(usuario) {
-  localStorage.setItem('cinevault_usuario', JSON.stringify({
-    id: usuario.id,
-    nome: usuario.nome,
-    email: usuario.email,
-  }));
 }
 
 function setLoading(button, loading, text) {
